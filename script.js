@@ -12,21 +12,35 @@ document.getElementById("showEffectBtn").addEventListener("click", function () {
     setTimeout(() => {
         heartElement.classList.remove("show");
         heartElement.classList.add("hidden");
-    }, 1500);
+    }, 1500); // Ẩn sau 1.5 giây
 });
-// script.js
-document.getElementById('showEffectBtn').addEventListener('click', function () {
-    // Hiển thị trái tim
-    const heartEffect = document.getElementById('heartEffect');
-    heartEffect.classList.remove('hidden'); // Hiện trái tim
-    heartEffect.classList.add('fade-in'); // Thêm hoạt ảnh
 
-    // Phát âm thanh
-    const soundEffect = document.getElementById('soundEffect');
-    soundEffect.play();
+// Tạo bông tuyết
+function createSnowflake() {
+    const snowflake = document.createElement("div");
+    snowflake.classList.add("snowflake");
+    snowflake.innerHTML = "❄";  // Bông tuyết (có thể thay đổi biểu tượng)
 
-    // Thêm hiệu ứng ẩn trái tim sau 3 giây
+    // Vị trí và kích thước ngẫu nhiên
+    snowflake.style.left = Math.random() * window.innerWidth + "px";
+    const size = Math.random() * 10 + 10; // Kích thước từ 10px đến 20px
+    snowflake.style.fontSize = `${size}px`;
+
+    // Tốc độ rơi và độ lắc lư ngẫu nhiên
+    const fallDuration = Math.random() * 1 + 1;
+    snowflake.style.animationDuration = `${fallDuration}s`;
+
+    const swayDuration = Math.random() * 2 + 2;
+    snowflake.style.animationDelay = `${Math.random()}s`;
+    snowflake.style.animation = `fall ${fallDuration}s linear infinite, sway ${swayDuration}s ease-in-out infinite`;
+
+    document.body.appendChild(snowflake);
+
+    // Xóa bông tuyết sau khi rơi xong
     setTimeout(() => {
-        heartEffect.classList.add('hidden');
-    }, 5000); // Ẩn sau 3 giây
-});
+        snowflake.remove();
+    }, fallDuration * 1000);
+}
+
+// Tạo bông tuyết mỗi 200ms
+setInterval(createSnowflake, 200);

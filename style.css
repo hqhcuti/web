@@ -20,15 +20,22 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #ff1493;
 }
 
+button:active {
+    transform: scale(2s); /* Thu nhỏ nút khi click */
+    transition: transform 0.2s ease;
+}
+
+/* Hiệu ứng trái tim */
 #heartEffect {
-    font-size: 50px;
+    font-size: 20px;
+    color: red;
     margin-top: 20px;
     opacity: 0;
     transform: scale(0);
@@ -40,20 +47,32 @@ button:hover {
     transform: scale(1.5);
 }
 
-.hidden {
-    display: none;
-}
-/* style.css */
-.hidden {
-    display: none; /* Ẩn phần tử ban đầu */
+/* Bông tuyết */
+.snowflake {
+    position: fixed;
+    top: -50px;
+    color: white;
+    font-size: 10px;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: fall linear infinite, sway ease-in-out infinite;
 }
 
-#heartEffect {
-    font-size: 26px;
-    color: red;
-    animation: fade-in 1s ease-out forwards;
-    text-align: center;
-    margin-top: 20px;
+/* Hiệu ứng rơi */
+@keyframes fall {
+    to {
+        transform: translateY(100vh); /* Rơi từ trên xuống đáy màn hình */
+    }
+}
+
+/* Hiệu ứng lắc lư khi rơi */
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(20px); /* Lắc qua phải */
+    }
 }
 
 /* Hoạt ảnh hiện trái tim */
@@ -66,10 +85,4 @@ button:hover {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-/* Hiệu ứng cho nút khi bấm */
-button:active {
-    transform: scale(0.95); /* Thu nhỏ nút khi click */
-    transition: transform 0.2s ease;
 }
